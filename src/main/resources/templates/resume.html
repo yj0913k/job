@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/resume.css"/>
+    <script type="text/javascript">
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('preview').src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                document.getElementById('preview').src = "";
+            }
+        }
+    </script>
+
+</head>
+<body>
+<form th:action="@{/resume/register}" th:object="${form}" method="post">
+    <section class="first-container">
+        <h1>이력서</h1>
+        <div class="first">
+            <div><img id="preview"/></div>
+            <div class="item"><input id="Image" type="file" onchange="previewImage(this)" accept="image/*"/></div>
+            <div>
+                <div class="item">
+                    <label>이름</label>
+                    <input type="text" id="name" th:field="*{name}"/>
+                </div>
+                <div class="item">
+                    <label>휴대폰</label>
+                    <input type="text" id="phone" th:field="*{phone}">
+                </div>
+                <div class="item">
+                    <label>전화번호</label>
+                    <input type="text" id="callNumber" th:field="*{telephone}"/>
+                </div>
+                <div class="item">
+                    <label>주소</label>
+                    <input type="text" id="address" th:field="*{address}"/>
+                </div>
+                <div class="item">
+                    <label>Email</label>
+                    <input type="text" id="eMail" th:field="*{email}"/>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="second-container">
+
+        <div>
+            <span>경력</span>
+            <select name="year" id="year" th:field="*{year}">
+                <option value="0">신입</option>
+                <option value="1">1년차</option>
+                <option value="2">2년차</option>
+                <option value="3">3년차</option>
+                <option value="4">4년차</option>
+                <option value="5">5년차 이상</option>
+            </select>
+        </div>
+        <div>
+            <span>인턴대외활동/해외경험</span>
+            <input type="text" th:field="*{intern}"/>
+        </div>
+        <div>
+            <span>자격증/어학</span>
+            <input type="text" th:field="*{certificate}"/>
+        </div>
+    </section>
+    <section class="third-container">
+        <h1>학력</h1>
+        <div class="flex">
+            <div>
+                <label></label>
+                <input type="month" id="dateStart" name="date" th:field="*{date1}">
+                ~<input type="month" id="dateEnd" name="date" th:field="*{date2}">
+            </div>
+            <div><input type="text" placeholder="학교명" th:field="*{school}"></div>
+            <div><input type="text" placeholder="학과명" th:field="*{department}"></div>
+            <div></div>
+        </div>
+    </section>
+    <button type="submit">등록</button>
+</form>
+</body>
+</html>
