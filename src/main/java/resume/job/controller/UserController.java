@@ -1,8 +1,7 @@
 package resume.job.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,9 +24,10 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<UserDTO> createUser(@ModelAttribute UserDTO userDTO) throws IOException {
+    public ModelAndView createUser(@ModelAttribute UserDTO userDTO, Model model) throws IOException {
 
-        UserDTO createUserDTO = userService.createUser(userDTO);
-        return new ResponseEntity<>(createUserDTO, HttpStatus.CREATED);
+        UserDTO createUserDTO = userService.createUser(userDTO, model);
+        ModelAndView mav = new ModelAndView("signUp");
+        return mav;
     }
 }
