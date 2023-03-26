@@ -20,12 +20,12 @@
 
 </head>
 <body>
-<form th:action="@{/resume/register}" th:object="${form}" method="post">
+<form th:action="@{/resume/register}" th:object="${form}" method="post" enctype="multipart/form-data">
     <section class="first-container">
         <h1>이력서</h1>
         <div class="first">
             <div><img id="preview"/></div>
-            <div class="item"><input id="Image" type="file" onchange="previewImage(this)" accept="image/*"/></div>
+            <div class="item"><input id="imageFiles" type="file" onchange="previewImage(this)" accept="image/*"/></div>
             <div>
                 <div class="item">
                     <label>이름</label>
@@ -75,11 +75,6 @@
     <section class="third-container">
         <h1>학력</h1>
         <div class="flex">
-            <div>
-                <label></label>
-                <input type="month" id="dateStart" name="date" th:field="*{date1}">
-                ~<input type="month" id="dateEnd" name="date" th:field="*{date2}">
-            </div>
             <div><input type="text" placeholder="학교명" th:field="*{school}"></div>
             <div><input type="text" placeholder="학과명" th:field="*{department}"></div>
             <div></div>
